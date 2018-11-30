@@ -46,31 +46,38 @@ void Program::addSourceLine(int lineNumber, string line) {
 	}
 	if (ope == "IF") {
 		IF_statement *p = new IF_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*) p));
+		pg[lineNumber] = (Statement*) p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*) p));
 	}
 	else if (ope == "REM") {
 		REM_statement *p = new REM_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 	else if (ope == "LET") {
 		LET_statement *p = new LET_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 	else if (ope == "PRINT") {
 		PRINT_statement *p = new PRINT_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 	else if (ope == "INPUT") {
 		INPUT_statement *p = new INPUT_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 	else if (ope == "END") {
 		END_statement *p = new END_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 	else if (ope == "GOTO") {
 		GOTO_statement *p = new GOTO_statement(lineNumber, line);
-		pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
+		pg[lineNumber] = (Statement*)p;
+	//	pg.insert(pair<int, Statement*>(lineNumber, (Statement*)p));
 	}
 }
 
