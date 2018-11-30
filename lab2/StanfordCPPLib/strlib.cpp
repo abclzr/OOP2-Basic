@@ -29,9 +29,10 @@ string integerToString(int n) {
 int stringToInteger(string str) {
    istringstream stream(str);
    int value;
-   stream >> value >> ws;
+   stream >> value;
    if (stream.fail() || !stream.eof()) {
-      error("stringToInteger: Illegal integer format (" + str + ")");
+	   error("INVALID NUMBER");
+     // error("stringToInteger: Illegal integer format (" + str + ")");
    }
    return value;
 }

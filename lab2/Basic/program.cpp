@@ -33,10 +33,17 @@ void Program::clear() {
 
 void Program::addSourceLine(int lineNumber, string line) {
    // Replace this stub with your own code
-	int l1 = line.find(" ");
-	int l2 = line.find(" ", l1 + 1);
-	if (l2 == string::npos) l2 = line.size();
-	string ope = line.substr(l1 + 1, l2 - l1 - 1);
+	string ope;
+	if (lineNumber != 0) {
+		int l1 = line.find(" ");
+		int l2 = line.find(" ", l1 + 1);
+		if (l2 == string::npos) l2 = line.size();
+		ope = line.substr(l1 + 1, l2 - l1 - 1);
+	}
+	else {
+		int l2 = line.find(" ");
+		ope = line.substr(0, l2);
+	}
 	if (ope == "IF") {
 		IF_statement *p = new IF_statement(lineNumber, line);
 		pg.insert(pair<int, Statement*>(lineNumber, (Statement*) p));
@@ -114,7 +121,11 @@ void Program::run_it() {
 	while (it != pg.end()) {
 		int result = it->second->execute(*state);
 		if (result == -1) ++it;
-		else it = pg.find(result);
+		else {
+			it = pg.find(result);
+			if (it == pg.end())
+				error("LINE NUMBER ERROR");
+		}
 	}
 	return;
 }

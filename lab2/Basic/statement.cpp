@@ -161,11 +161,15 @@ INPUT_statement::~INPUT_statement() {
 }
 
 int INPUT_statement::execute(EvalState & state) {
-	cout << var + "?";
+	cout << "?";
 	string str;
-	cin >> str;
+	char ch = getchar();
+	while (ch != '\n') {
+		str += ch;
+		ch = getchar();
+	}
 	int num = stringToInteger(str);
-	state.setValue(str, num);
+	state.setValue(var, num);
 	return -1;
 }
 
