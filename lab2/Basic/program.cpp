@@ -133,6 +133,6 @@ void Program::run_it() {
 void Program::list_it() {
 	map<int, Statement*>::iterator it = pg.begin();
 	for (; it != pg.end(); ++it)
-		cout << it->second->get_source_str();
+		cout << it->second->get_source_str() << endl;
 	return;
 }
