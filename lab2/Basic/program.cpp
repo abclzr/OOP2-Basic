@@ -83,7 +83,7 @@ void Program::addSourceLine(int lineNumber, string line) {
 
 void Program::removeSourceLine(int lineNumber) {
 	map<int, Statement*>::iterator it = pg.find(lineNumber);
-	if (it == pg.end()) error("SYNTAX ERROR");
+	if (it == pg.end()) return;
 	pg.erase(it);
    // Replace this stub with your own code
 }
