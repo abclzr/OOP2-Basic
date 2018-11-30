@@ -57,7 +57,7 @@ int main() {
 			break;
 		 }
       } catch (ErrorException & ex) {
-         cerr << "Error: " << ex.getMessage() << endl;
+         cerr << ex.getMessage() << endl;
       }
    }
    return 0;
