@@ -14,6 +14,7 @@
 
 #include "evalstate.h"
 #include "exp.h"
+#include "parser.h"
 
 /*
  * Class: Statement
@@ -28,7 +29,8 @@
 class Statement {
 
 public:
-
+	int linenum;
+	string source_str;
 /*
  * Constructor: Statement
  * ----------------------
@@ -60,7 +62,9 @@ public:
  * controlling the operation of the interpreter.
  */
 
-   virtual void execute(EvalState & state) = 0;
+   virtual int execute(EvalState & state) = 0;
+
+   string get_source_str();
 
 };
 
@@ -74,5 +78,65 @@ public:
  * an Expression object), the class implementation must also
  * specify its own destructor method to free that memory.
  */
+
+class IF_statement : Statement {
+public:
+	IF_statement(int, string);
+	~IF_statement();
+	int execute(EvalState &);
+private:
+	int to_linenum, op;
+	Expression *rt1, *rt2;
+};
+
+class REM_statement : Statement {
+public:
+	REM_statement(int, string);
+	~REM_statement();
+	int execute(EvalState &);
+};
+
+class LET_statement : Statement {
+public:
+	LET_statement(int, string);
+	~LET_statement();
+	int execute(EvalState &);
+private:
+	Expression *rt;
+};
+
+class PRINT_statement : Statement {
+public:
+	PRINT_statement(int, string);
+	~PRINT_statement();
+	int execute(EvalState &);
+private:
+	Expression *rt;
+};
+
+class INPUT_statement : Statement {
+public:
+	INPUT_statement(int, string);
+	~INPUT_statement();
+	int execute(EvalState &);
+private:
+	string var;
+};
+
+class END_statement : Statement {
+public:
+	END_statement(int, string);
+	~END_statement();
+	int execute(EvalState &);
+};
+
+class GOTO_statement : Statement {
+public:
+	GOTO_statement(int, string);
+	~GOTO_statement();
+	int execute(EvalState &);
+private:
+	int to_linenum;
+};
 
 #endif

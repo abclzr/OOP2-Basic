@@ -24,7 +24,8 @@ using namespace std;
 Expression *parseExp(TokenScanner & scanner) {
    Expression *exp = readE(scanner);
    if (scanner.hasMoreTokens()) {
-      error("parseExp: Found extra token: " + scanner.nextToken());
+	   error("SYNTAX ERROR");
+//      error("parseExp: Found extra token: " + scanner.nextToken());
    }
    return exp;
 }

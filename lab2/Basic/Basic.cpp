@@ -1,7 +1,7 @@
 /*
  * File: Basic.cpp
  * ---------------
- * Name: [TODO: enter name here]
+ * Name: [TODO:lizirui]
  * Section: [TODO: enter section leader here]
  * This file is the starter project for the BASIC interpreter from
  * Assignment #6.
@@ -21,9 +21,11 @@
 #include "../StanfordCPPLib/strlib.h"
 using namespace std;
 
+enum ProcessType {RUN, LIST, CLEAR, QUIT, HELP, OTHER};
+
 /* Function prototypes */
 
-void processLine(string line, Program & program, EvalState & state);
+ProcessType processLine(string line, Program & program, EvalState & state);
 
 /* Main program */
 
@@ -33,7 +35,27 @@ int main() {
    cout << "Stub implementation of BASIC" << endl;
    while (true) {
       try {
-         processLine(getLine(), program, state);
+		  string line = getLine();
+         ProcessType pt = processLine(line, program, state);
+		 switch (pt) {
+			case RUN:
+				program.run_it();
+			break;
+			case LIST:
+				program.list_it();
+			break;
+			case CLEAR:
+				program.clear();
+			break;
+			case QUIT:
+				return 0;
+			break;
+			case HELP:
+				cout << "maozhuxishuoguo:zijidongshoufengyizushi" << endl;
+			break;
+			case OTHER:
+			break;
+		 }
       } catch (ErrorException & ex) {
          cerr << "Error: " << ex.getMessage() << endl;
       }
@@ -54,7 +76,25 @@ int main() {
  * or one of the BASIC commands, such as LIST or RUN.
  */
 
-void processLine(string line, Program & program, EvalState & state) {
+ProcessType processLine(string line, Program & program, EvalState & state) {
+	if (line == "RUN") return RUN;
+	if (line == "LIST") return LIST;
+	if (line == "CLEAR") return CLEAR;
+	if (line == "QUIT") return QUIT;
+	if (line == "HELP") return HELP;
+
+	int pos = line.find(" ");
+	if (line[0] >= '0' && line[0] <= '9') {
+		int linenum = stringToInteger(line.substr(0, pos));
+		if (pos == string::npos) program.removeSourceLine(linenum);
+		else program.addSourceLine(linenum, line);
+	}
+	else {
+		program.addSourceLine(0, line);
+		program.execute_oneline(0);
+		program.removeSourceLine(0);
+	}
+	/*
    TokenScanner scanner;
    scanner.ignoreWhitespace();
    scanner.scanNumbers();
@@ -63,4 +103,6 @@ void processLine(string line, Program & program, EvalState & state) {
    int value = exp->eval(state);
    cout << value << endl;
    delete exp;
+   */
+   return OTHER;
 }

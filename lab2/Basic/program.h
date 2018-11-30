@@ -135,10 +135,18 @@ public:
 
    int getNextLineNumber(int lineNumber);
 
+   void execute_oneline(int lineNumber);
+
+   void run_it();
+
+   void list_it();
+
 private:
 
 // Fill this in with whatever types and instance variables you need
 
+	map<int, Statement *> pg;
+	EvalState *state;
 };
 
 #endif
