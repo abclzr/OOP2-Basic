@@ -23,10 +23,14 @@ EvalState::~EvalState() {
 }
 
 void EvalState::setValue(string var, int value) {
+	if (var == "LET" || var == "INPUT" || var == "PRINT" || var == "REM" || var == "GOTO" || var == "IF" || var == "THEN" || var == "END")
+		error("SYNTAX ERROR");
    symbolTable.put(var, value);
 }
 
 int EvalState::getValue(string var) {
+	if (var == "LET" || var == "INPUT" || var == "PRINT" || var == "REM" || var == "GOTO" || var == "IF" || var == "THEN" || var == "END")
+		error("SYNTAX ERROR");
    return symbolTable.get(var);
 }
 
