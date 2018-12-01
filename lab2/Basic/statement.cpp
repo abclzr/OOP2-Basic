@@ -10,6 +10,8 @@
 #include <string>
 #include "statement.h"
 #include "parser.h"
+#include "../StanfordCPPLib/error.h"
+
 
 using namespace std;
 
@@ -161,15 +163,21 @@ INPUT_statement::~INPUT_statement() {
 }
 
 int INPUT_statement::execute(EvalState & state) {
-	cout << " ? ";
-	string str;
-	char ch = getchar();
-	while (ch != '\n') {
-		str += ch;
-		ch = getchar();
+	try {
+		cout << " ? ";
+		string str;
+		char ch = getchar();
+		while (ch != '\n') {
+			str += ch;
+			ch = getchar();
+		}
+		int num = stringToInteger(str);
+		state.setValue(var, num);
 	}
-	int num = stringToInteger(str);
-	state.setValue(var, num);
+	catch (ErrorException & ex) {
+		cout << ex.getMessage() << endl;
+		execute(state);
+	}
 	return -1;
 }
 

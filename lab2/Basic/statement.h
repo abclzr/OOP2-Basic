@@ -15,6 +15,8 @@
 #include "evalstate.h"
 #include "exp.h"
 #include "parser.h"
+#include "../StanfordCPPLib/error.h"
+
 
 /*
  * Class: Statement
