@@ -128,6 +128,7 @@ void Program::run_it() {
 	while (it != pg.end()) {
 		int result = it->second->execute(*state);
 		if (result == -1) ++it;
+		else if (result == -2) return;
 		else {
 			it = pg.find(result);
 			if (it == pg.end())
