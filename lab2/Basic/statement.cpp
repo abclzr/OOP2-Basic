@@ -161,7 +161,7 @@ INPUT_statement::~INPUT_statement() {
 }
 
 int INPUT_statement::execute(EvalState & state) {
-	cout << "? ";
+	cout << " ? ";
 	string str;
 	char ch = getchar();
 	while (ch != '\n') {
