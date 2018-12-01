@@ -41,7 +41,7 @@ IF_statement::IF_statement(int num, string str) {
 		p3 = str_exp.find(">"); op = 1;
 	}
 	if (p3 == string::npos) {
-		p3 = str_exp.find("-"); op = 2;
+		p3 = str_exp.find("="); op = 2;
 	}
 
 	string s1 = str_exp.substr(0, p3);
